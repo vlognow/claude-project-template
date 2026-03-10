@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "window.title": "${folderName}",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "window.restoreWindows": "none"
+  }
+}
