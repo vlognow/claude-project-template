@@ -10,7 +10,7 @@ Do xxx.
 ## Open Questions
 - Is aspect yyy really needed for xxx?
 
-## Background: Auth Components to Remove
+## Background
 - `src/xxx.go` — contains code related to xxx.
 - [Project xxx](https://www.notion.so/your-workspace/Page-xxx) contains helpful documentation
 

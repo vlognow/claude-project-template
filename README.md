@@ -1,13 +1,15 @@
-# Claude Project Template
+# Claude/VSCode Project Template
 
 ## Overview
 
-This repository provides a reusable setup for working with [Claude Code](https://claude.ai/code) (CC) across multiple projects. It includes:
+The idea of this project template is to get you using [Claude Code](https://claude.ai/code) (**CC**) for all your work. The strategy employed here is that you have a main Tasks or Projects folder somewhere in your computer. Inside that folder would be one folder per project you are working on. Each project folder would contain all the files (or links to them) that you need to do your work. [VSCode](https://code.visualstudio.com/) is a nice IDE (Integrated Development Environment) that opens on your folder and lets you view and work with your project files. And you'll have a Claude Code terminal window that opens (focused on the same project folder) that can help you do your work. *(The **CC** windows will be titled with the name of your project folder so you can work on multiple projects simultaneously without being confused by multiple windows with the same '**Claude Code**' title.)*
+
+> :warning: If you don't like VSCode or prefer another IDE, this project may not be of much use to you! :anguished: (A few ideas here and there, maybe.)
+
+### Components:
 
 - **Global files** (`files/`) — a `CLAUDE.md` with your personal preferences and a helper PowerShell script, both installed to `~/.claude/`.
-- **Project template** (`_Template/`) — a ready-to-copy project folder pre-configured with a VSCode workspace, Claude settings, milestone tracking, and a `.claudeignore`.
-
-The pattern is one folder per project/task. Each folder opens as its own VSCode workspace, which automatically launches Claude Code in a dedicated terminal tab pointed at that folder.
+- **Project template** (`_Template/`) — a ready-to-copy project folder pre-configured with a VSCode workspace, Claude settings, milestone tracking, `.claudeignore` and a `README.md` with details on how to use the template.
 
 ---
 
@@ -32,7 +34,20 @@ After running, edit `~/.claude/CLAUDE.md` to fill in your personal details (emai
 
 > **Existing `CLAUDE.md` warning:** If you already have a `~/.claude/CLAUDE.md`, the script will prompt before overwriting. Choose **N** (skip) to preserve your existing file, then manually merge the relevant sections from `files/CLAUDE.md` into it rather than replacing it outright.
 
-### Step 2 — Copy the `_Template` folder
+### Step 2 — Edit the global `~/.claude/CLAUDE.md` file
+
+It has two specific fields that need your attention:
+
+1. Set your email on the Email: line
+2. Set your Jira account ID (if you are using the Atlassian MCP server with **CC**)
+>To find your Jira account ID, open a browser where you're logged into Jira and navigate to
+  https://machinify.atlassian.net/rest/api/3/myself — your accountId is in the JSON response.
+>
+> To install the Atlassian MCP Server, see this [Notion article](https://www.notion.so/machinify/Install-Claude-Code-Enterprise-30d5356b39718056be01e5eb7ce42d15#30d5356b3971804e871cf0018e771ad2)
+
+## Get Started
+
+### Step 1 — Copy the `_Template` folder
 
 Copy `_Template` to wherever you keep your projects and rename it for the new project:
 
@@ -45,57 +60,9 @@ On Windows (PowerShell):
 Copy-Item -Recurse _Template "$env:USERPROFILE\Projects\my-new-project"
 ```
 
----
+### Step 2 — Open new project folder
 
-## Setting Up a New Project
-
-1. **Copy and rename** `_Template` as described above.
-2. **Edit `CLAUDE.md`** in the new folder — see [How Claude remembers your project](https://code.claude.com/docs/en/memory#claudemd-files) for guidance on writing effective instructions.
-   - Set the project name in the `# Project:` heading.
-   - Fill in the **Overview**, **Status**, **Milestones**, **Scope**, **Tech Stack**, and **Key Decisions** sections.
-   - Remove any placeholder sections that don't apply (e.g. **Tech Stack** for non-code projects).
-3. **Rename `milestone1-xxx.md`** to match your first milestone (e.g. `milestone1-setup.md`) and update its contents.
-4. **Update the Milestones table** in `CLAUDE.md` to link to your renamed milestone file.
-5. Optionally add a `links/` subfolder for `.url` shortcut files to related pages.
-
-> Personal project notes go in `notes.md` — it is listed in `.claudeignore` so Claude will never read it.
-
----
-
-## Using a Project
-
-### Opening the workspace
-
-Open the project by double-clicking `project.code-workspace` (or `File > Open Workspace from File...` in VSCode). The workspace sets the window title to the folder name and pins the terminal to the project root (this way having multiple projects open at once won't be confusing - there won't be 4 'Claude Code' terminal windows).
-
-### Auto-launching Claude Code
-
-When the workspace opens, VSCode automatically runs the **Start Claude** task (defined in `.vscode/tasks.json`). This opens a new Windows Terminal tab titled with the project name and launches `claude` inside it, using `~/.claude/start-claude.ps1` to ensure a clean environment.
-
-> On first open, VSCode may prompt you to allow automatic task execution. Click **Allow** (or set `task.allowAutomaticTasks` to `on` in your VSCode user settings).
-
-### Working with milestones
-
-Each milestone has its own `milestoneN-name.md` file tracking its goal, key decisions, open questions, and a task checklist.
-
-- The **Milestones table** in `CLAUDE.md` gives Claude a quick status overview at the start of every session.
-- Update `**Status:**` in the milestone file as work progresses (`Not Started` → `In Progress` → `Complete`).
-- When starting a session, Claude will read `CLAUDE.md` automatically and pick up the active milestone and current status.
-- You can tell Claude: *"Continue with the active milestone"* and it will orient itself from `CLAUDE.md` without further prompting.
-- Add new milestone files and rows to the table as the project grows.
-
-### Auto memory
-
-The global `~/.claude/CLAUDE.md` installed by this template enables **auto memory** — Claude will automatically save notes (build commands, debugging insights, discovered preferences) to `~/.claude/projects/<project>/memory/MEMORY.md` and persist them across sessions. You can view, edit, or clear these notes at any time by running `/memory` inside a Claude session. See [Auto memory](https://code.claude.com/docs/en/memory#auto-memory) for full details on how it works and how to disable it if needed.
-
-### Useful conventions
-
-| Subfolder | Purpose |
-|-----------|---------|
-| `links/`  | `.url` shortcut files to related web pages |
-| `assets/` | Images, data files (excluded from Claude by default) |
-| `docs/`   | Reference material, specs, research |
-| `src/`    | Source code (code projects only) |
+Follow the new project folder's README.md
 
 ---
 
