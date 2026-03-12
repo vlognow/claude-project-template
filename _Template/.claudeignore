@@ -1,0 +1,54 @@
+# Personal notes
+notes.md
+
+# Secrets & credentials
+.env
+.env.*
+*.pem
+*.key
+secrets.*
+credentials.*
+
+# Dependencies
+node_modules/
+.venv/
+vendor/
+__pycache__/
+
+# Build artifacts
+dist/
+build/
+out/
+.next/
+target/
+*.pyc
+*.class
+
+# Logs & cache
+*.log
+logs/
+.cache/
+.pytest_cache/
+.mypy_cache/
+coverage/
+
+# OS & editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+*.code-workspace
+.idea/
+
+# Project subfolders
+assets/
+
+# Large binaries
+*.zip
+*.tar.gz
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.pdf
