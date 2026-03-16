@@ -17,22 +17,16 @@ The idea of this project template is to get you using [Claude Code](https://clau
 
 ### Step 1 — Install global files
 
-Run the install script from the repo root. It copies everything in `files/` into `~/.claude/`, prompting before overwriting any existing files.
+Double-click the installer for your platform. It copies everything in `files/` into `~/.claude/`, skipping any files that already exist.
 
-**Mac / Linux / Git Bash on Windows:**
-```bash
-bash install.sh
-```
+**Windows:** Double-click `install_win.bat` in Explorer.
 
-**PowerShell on Windows:**
-```powershell
-bash install.sh
-```
-> Git Bash must be installed. Alternatively, manually copy `files/CLAUDE.md` and `files/start-claude.ps1` to `%USERPROFILE%\.claude\`.
+**Mac:** Double-click `install_mac.command` in Finder.
+> First time only: macOS may block it. If so, right-click → Open, then click Open in the dialog. You may also need to run `chmod +x install_mac.command` once in Terminal if it doesn't open.
 
 After running, edit `~/.claude/CLAUDE.md` to fill in your personal details (email, Jira account ID, etc.).
 
-> **Existing `CLAUDE.md` warning:** If you already have a `~/.claude/CLAUDE.md`, the script will prompt before overwriting. Choose **N** (skip) to preserve your existing file, then manually merge the relevant sections from `files/CLAUDE.md` into it rather than replacing it outright.
+> **Existing files are skipped.** If you already have a `~/.claude/CLAUDE.md`, it will not be overwritten. Manually merge any sections from `files/CLAUDE.md` into your existing file.
 
 ### Step 2 — Edit the global `~/.claude/CLAUDE.md` file
 
