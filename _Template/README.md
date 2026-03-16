@@ -1,5 +1,7 @@
 # Using the Claude/VSCode Template
 
+> Note: This whole README.md file can be (and probably should be) overwritten with you specific project notes, install/usage information, etc. 
+
 ## How to Use This Template Project
 
 1. **ASSUMPTION:** you have copied the _Template folder to wherever you keep your projects and renamed it.
