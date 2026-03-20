@@ -1,6 +1,3 @@
-# Project readme (reference/how-to, not Claude directives)
-README.md
-
 # Secrets & credentials
 .env
 .env.*

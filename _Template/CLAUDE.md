@@ -1,36 +1,27 @@
 # Project: Template
 
 ## Overview
-Serves as a copy-and-modify template project directory.
+Provide an overview of purpose, goals and usage of the project.
 
-## Status
-**Active Milestone:** xxx
-**Default Jira Project:** [JiraProject]
-
-Brief note on where things stand and what's next.
+## Attributes
+- **Active Milestone:** ms-xxx
+- **Default Jira Project:** [JiraProject]
 
 ## Milestones
-| # | Name | Status | Detail |
+| # | Name | Status | File |
 |---|---|---|---|
-| 1 | xxx | Not Started | [milestone1-xxx.md](milestone1-xxx.md) |
+| 1 | ms-xxx | Not Started | [milestone-xxx](milestone1-xxx.md) |
 
 ## Scope
 
 ### In Scope
-- covers xxx
+- covers yyy
 
 ### Out of Scope
-- does not cover yyy
+- does not cover zzz
 
 ## Tech Stack
-- Language/framework (e.g. Go, Python, TypeScript)
-- Specific libraries or services that affect design decisions (e.g. `github.com/mark3labs/mcp-go`, gRPC, Snowflake)
-
-## Key Decisions
-- **[Decision]** — why it was made and what alternatives were rejected
+- Languages/frameworks (e.g. Scala, Python, Rust, TypeScript)
 
 ## Related Projects
-- **[Name]** → `$HOME/path/to/repo` — one-line description of what lives there
-
-## Open Questions
-- [Question] — what decision or task is blocked until this is answered
+- **[Cool_Project]** — `https://github.com/vlognow/cool_proj` — one-line description of the coolness

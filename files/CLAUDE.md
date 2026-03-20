@@ -14,6 +14,14 @@
 - When creating Jira stories, always assign to me using the account ID above
 - Never hard-code sprint IDs — look up the active sprint dynamically via `list_sprints_for_board`
 
+## MCP Tools
+
+### Argo
+- When the `convert_seed` tool is available, always use it to convert DPE Seed XML — never manually reason the conversion from Seed XML to SQL, DBT, or notebook format.
+
+### NTFY
+- Never include PHI, PII, credentials, API keys, or tokens in NTFY messages. Limit content to task status, completion signals, and non-identifying summaries.
+
 ## Memory
 - At the start of each new project, proactively create a MEMORY.md in the auto memory directory with key paths, decisions, and milestone status.
 - Keep MEMORY.md current as work progresses — update milestone status, add decisions made, and resolve open questions as they are answered.

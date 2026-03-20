@@ -1,11 +1,10 @@
 # Milestone 1: xxx
-**Status:** Not Started
 
 ## Goal
 Do xxx.
 
 ## Key Decisions
-- xxx must be built in Go
+- xxx must be built in Rust
 
 ## Open Questions
 - Is aspect yyy really needed for xxx?

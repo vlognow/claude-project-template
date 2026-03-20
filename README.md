@@ -56,7 +56,7 @@ Copy-Item -Recurse _Template "$env:USERPROFILE\Projects\my-new-project"
 
 ### Step 2 — Open new project folder
 
-Follow the new project folder's README.md
+See [project-guide.md](project-guide.md) for full usage instructions.
 
 ---
 
