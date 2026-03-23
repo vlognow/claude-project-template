@@ -9,6 +9,9 @@
 ## Me
 - Email: joe.smith@machinify.com
 
+## My Projects Folder
+C:/path/to/your/Tasks
+
 ## Jira (Atlassian)
 - Jira account ID: `123456:00000000-1111-2222-3333-444444444444`
 - When creating Jira stories, always assign to me using the account ID above

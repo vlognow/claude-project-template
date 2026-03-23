@@ -8,7 +8,7 @@ The idea of this project template is to get you using [Claude Code](https://clau
 
 ### Components:
 
-- **Global files** (`files/`) — a `CLAUDE.md` with your personal preferences, a helper PowerShell script, and skills — all installed to `~/.claude/`.
+- **Global files** (`files/`) — a `CLAUDE.md` with your personal preferences, a helper PowerShell script (Windows only), and skills — all installed to `~/.claude/`.
 - **Project template** (`_Template/`) — a ready-to-copy project folder pre-configured with a VSCode workspace, Claude settings, milestone tracking, and `.claudeignore`.
 - **Skills** — slash commands that extend Claude Code with reusable workflows.
 
@@ -27,16 +27,19 @@ Double-click the installer for your platform. It copies everything in `files/` i
 
 After running, edit `~/.claude/CLAUDE.md` to fill in your personal details (email, Jira account ID, etc.).
 
-> **Manual install:** If you prefer not to use the installer, copy each file in `files/` to `~/.claude/`, and copy `files/skills/status-report.md` to `~/.claude/skills/status-report.md`. Skip any files that already exist at the destination.
+> **Manual install:** If you prefer not to use the installer, copy each file in `files/` to `~/.claude/`, and copy `files/skills/status-report/SKILL.md` to `~/.claude/skills/status-report/SKILL.md`. Skip any files that already exist at the destination. **Mac users:** skip `start-claude.ps1` — it's Windows-only.
 
 > **Existing files are skipped.** If you already have a `~/.claude/CLAUDE.md`, the installers will not overwrite it. Manually merge any sections from `files/CLAUDE.md` into your existing file.
 
+> :sunglasses: To keep tab titles after sleep/wake on Windows, ask Claude: "Add suppressApplicationTitle to my Windows PowerShell profile in Windows Terminal settings.json"
+
 ### Step 2 — Edit the global `~/.claude/CLAUDE.md` file
 
-It has two specific fields that need your attention:
+It has three specific fields that need your attention:
 
 1. Set your email on the Email: line
-2. Set your Jira account ID (if you are using the Atlassian MCP server with **CC**)
+2. Set your Projects Folder path under **My Projects Folder**
+3. Set your Jira account ID (if you are using the Atlassian MCP server with **CC**).
 >To find your Jira account ID, open a browser where you're logged into Jira and navigate to
   https://machinify.atlassian.net/rest/api/3/myself — your accountId is in the JSON response.
 >

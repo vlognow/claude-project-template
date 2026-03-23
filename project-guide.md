@@ -14,7 +14,7 @@ This project template is designed to give you a quick way to start a new project
 3. **Define Milestones and Tasks**
 This template allows for multiple phases or milestones to your project. Each milestone has its own list of tasks. The idea is that you work on one milestone at a time - this keeps all the information/tasks for the other milestones **out of context** until they are needed. Within `CLAUDE.md`, there is a simple table showing all the milestone names, short status and a link to the separate milestone file.
 
-> Tip: Just define enough to get started (at least 1 milestone) - Claude can do a great job of adding milestones and tasks, adjusting goals, adding questions and decisions, etc. - Just ask!
+> :sunglasses: Just define enough to get started (at least 1 milestone) - Claude can do a great job of adding milestones and tasks, adjusting goals, adding questions and decisions, etc. - Just ask!
 
 **Update the milestone table - For each milestone:**
   - Set the milestone name
@@ -43,13 +43,13 @@ For each milestone:
 
 ### Opening the workspace
 
-> Note: If you had VSCode open to do the editing of the project files, close all project windows before continuing
+> :round_pushpin: If you had VSCode open to do the editing of the project files, close all project windows before continuing
 
 Open the project by double-clicking `project.code-workspace` (or `File > Open Workspace from File...` in VSCode). 
 
 #### Auto-launching Claude Code
 
-When the workspace opens, VSCode automatically runs the **Start Claude** task (defined in `.vscode/tasks.json`). This opens a new terminal running `claude`, using `~/.claude/start-claude.ps1` to ensure a clean environment. The workspace also sets the Claude window's working directory to the project root and sets its window title to the folder name (this way having multiple projects open at once won't be confusing - there won't be 4 'Claude Code' terminal windows).
+When the workspace opens, VSCode automatically runs the **Start Claude** task (defined in `.vscode/tasks.json`). This opens a new terminal running `claude`, using `~/.claude/start-claude.ps1` to ensure a clean environment (Windows) or via AppleScript (Macintosh). The workspace also sets the Claude window's working directory to the project root and sets its window title to the folder name (this way having multiple projects open at once won't be confusing - there won't be 4 'Claude Code' terminal windows).
 
 > :round_pushpin: On first open, VSCode may prompt you to allow automatic task execution. Click **Allow** (or set `task.allowAutomaticTasks` to `on` in your VSCode user settings).
 
@@ -68,7 +68,7 @@ The global `~/.claude/CLAUDE.md` installed by this template enables **auto memor
 
 When you want your project to use another folder (whether it's a folder of code, of seed files, any other set of useful files), you don't need to copy them into the project (unless you want to - maybe you want to change the file without affecting the original). 
 
-> Tip: Use the VSCode `Add folder to workspace` command to bring the existing folder into view of your project
+> :sunglasses: Use the VSCode `Add folder to workspace` command to bring the existing folder into view of your project
 
 When you instruct Claude to refer to a file inside the newly added folder, you can say something like `...use myFile from myFolder that was added to the workspace...` and Claude will know where to find your file.
 
@@ -94,7 +94,9 @@ When you instruct Claude to refer to a file inside the newly added folder, you c
 
 - Global `CLAUDE.md` at `~/.claude/CLAUDE.md` contains directives that apply to all sessions (e.g., auto memory, coding conventions).
 - Global MCP servers are defined in `~/.claude.json` (near the bottom).
-> Warning: But be careful, within the `.claude.json` file are **multiple** `mcpServers` sections - All but 1 are within a section starting with the full path to a project - **normally, you don't want those** - you'll add your MCP servers at the User level (the one mcpServers section **not** inside a project section)
+> :radioactive: But be careful, within the `.claude.json` file are **multiple** `mcpServers` sections - All but 1 are within a section starting with the full path to a project - **normally, you don't want those** - you'll add your MCP servers at the User level (the one mcpServers section **not** inside a project section)
+
+> :sunglasses: To keep tab titles after sleep/wake on Windows, ask Claude: "Add suppressApplicationTitle to my Windows PowerShell profile in Windows Terminal settings.json"
 
 ### Atlassian MCP Tips
 

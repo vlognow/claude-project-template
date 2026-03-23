@@ -27,30 +27,40 @@ Generate a weekly or monthly status report from project history files.
 - Format as `Month YYYY` (e.g., `March 2026`) — this is `{{week_of}}`.
 - Output filename: `report-YYYY-MM.md`.
 
-### 2. Locate history files
-- History files live at `history/YYYY-MM-monthname.md` (e.g., `history/2026-03-march.md`).
-- The target period may span two months (possible in week mode) — read both files if needed.
-- If no `history/` directory exists, or no file covers the target period's date range, stop and tell the user:
-  - What is missing (directory or specific file)
-  - The expected path and file naming convention
-  - That they need to create and populate history entries before running the skill
+### 2. Locate projects root
+- Read `~/.claude/CLAUDE.md` and look for a `## My Projects Folder` section. The path is on the line immediately following that heading.
+- If the section is not found, stop and tell the user:
+  > ❌ `My Projects Folder` is not configured. Add the following to your `~/.claude/CLAUDE.md`:
+  > ```
+  > ## My Projects Folder
+  > /path/to/your/Tasks
+  > ```
+  > This should be the folder that contains all your project subdirectories.
 
-### 3. Parse entries for the target period
-- Filter entries whose `YYYY-MM-DD` date prefix falls within the period's start and end dates (inclusive).
+### 3. Locate history files across all projects
+- Scan all immediate subdirectories of the projects root. A subdirectory is a **project** if it contains a `history/` folder.
+- For each project:
+  - Derive the project name: read the project's `CLAUDE.md` and extract the value after `# Project:` on the first matching line. If not found, fall back to the folder name.
+  - Identify the history file(s) covering the target period (`history/YYYY-MM-monthname.md`). The target period may span two months — read both files if needed.
+- If no projects with history folders are found at all, stop and tell the user what path was scanned and that no `history/` directories were found.
+
+### 4. Parse entries for the target period
+- For each project, filter entries whose `YYYY-MM-DD` date prefix falls within the period's start and end dates (inclusive).
 - Entry format: `- YYYY-MM-DD [TYPE] Description | Milestone: M# | Business Value: <value> | Status: <status>`
 - Separate entries into two groups:
   - **Completed:** `Status: complete` — used for Updates section
   - **In-progress:** `Status: in-progress` — used for Coming Up section
+- Track which project each entry belongs to.
 - Track any completed entries where `Business Value` is absent or empty.
 
-### 4. Resolve `{{prepared_by}}`
+### 5. Resolve `{{prepared_by}}`
 - Use the current user's full name from their global Claude settings (`~/.claude/CLAUDE.md`).
 
-### 5. Load the template
+### 6. Load the template
 - If `report-template.md` exists in the working directory, use it as the report structure.
 - Otherwise, use the default template embedded at the bottom of this skill file.
 
-### 6. Build report content
+### 7. Build report content
 
 #### `{{team_objectives}}`
 - Bulleted list of distinct project/objective names drawn from the completed entries.
@@ -76,13 +86,19 @@ Generate a weekly or monthly status report from project history files.
 - Bulleted list of descriptions from in-progress entries.
 - If no in-progress entries exist, omit this section entirely (see warnings below).
 
-### 7. Warnings (output to Claude Code terminal, not in the report)
+### 8. Warnings (output to Claude Code terminal, not in the report)
 - If any completed entries were missing business values:
   > ⚠️ Business value was missing for one or more history entries. For best results, add `Business Value:` to those entries and regenerate the report.
 - If no in-progress entries were found:
   > ⚠️ No in-progress entries found — the "Coming Up" section was not included in the report.
+- If any project subdirectories were skipped because they had no `history/` folder, list each one by name:
+  > ⚠️ The following projects were skipped because they have no `history/` folder and could not contribute to this report:
+  > - `<project name>`
+  > - ...
+  >
+  > To include these projects in future reports, add a `history/` folder to each one and log activity using the entry format described in the `## Data Sources` section of your project's `CLAUDE.md`. The global `~/.claude/CLAUDE.md` file defines the expected format and conventions.
 
-### 8. Write the report file
+### 9. Write the report file
 - Use the output filename determined in Step 1.
 - Write the file to the working directory.
 - Render the report in the chat for review.
