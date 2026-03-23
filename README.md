@@ -60,4 +60,12 @@ See [project-guide.md](project-guide.md) for full usage instructions.
 
 ---
 
+## Keeping Your Work History
+
+Each project maintains a `history/` folder with monthly log files (`history/YYYY-MM-monthname.md`). Claude appends an entry whenever a task or milestone is completed, capturing the date, type, description, and business value.
+
+**Recommendation:** Periodically remind Claude to record work history — especially at the end of a work session or when wrapping up a milestone. Also make sure Claude asks for (and records) **business value** when you create a new task or milestone. This history is the primary input for automated weekly status reports and productivity tracking.
+
+---
+
 Maintained by [John Moses](mailto:john.moses@machinify.com)
