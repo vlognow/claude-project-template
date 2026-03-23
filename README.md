@@ -8,8 +8,9 @@ The idea of this project template is to get you using [Claude Code](https://clau
 
 ### Components:
 
-- **Global files** (`files/`) — a `CLAUDE.md` with your personal preferences and a helper PowerShell script, both installed to `~/.claude/`.
-- **Project template** (`_Template/`) — a ready-to-copy project folder pre-configured with a VSCode workspace, Claude settings, milestone tracking, `.claudeignore` and a `README.md` with details on how to use the template.
+- **Global files** (`files/`) — a `CLAUDE.md` with your personal preferences, a helper PowerShell script, and skills — all installed to `~/.claude/`.
+- **Project template** (`_Template/`) — a ready-to-copy project folder pre-configured with a VSCode workspace, Claude settings, milestone tracking, and `.claudeignore`.
+- **Skills** — slash commands that extend Claude Code with reusable workflows.
 
 ---
 
@@ -26,7 +27,9 @@ Double-click the installer for your platform. It copies everything in `files/` i
 
 After running, edit `~/.claude/CLAUDE.md` to fill in your personal details (email, Jira account ID, etc.).
 
-> **Existing files are skipped.** If you already have a `~/.claude/CLAUDE.md`, it will not be overwritten. Manually merge any sections from `files/CLAUDE.md` into your existing file.
+> **Manual install:** If you prefer not to use the installer, copy each file in `files/` to `~/.claude/`, and copy `files/skills/status-report.md` to `~/.claude/skills/status-report.md`. Skip any files that already exist at the destination.
+
+> **Existing files are skipped.** If you already have a `~/.claude/CLAUDE.md`, the installers will not overwrite it. Manually merge any sections from `files/CLAUDE.md` into your existing file.
 
 ### Step 2 — Edit the global `~/.claude/CLAUDE.md` file
 
@@ -56,7 +59,7 @@ Copy-Item -Recurse _Template "$env:USERPROFILE\Projects\my-new-project"
 
 ### Step 2 — Open new project folder
 
-See [project-guide.md](project-guide.md) for full usage instructions.
+See [project-guide.md](project-guide.md) for full usage instructions and [skills-guide.md](skills-guide.md) for details on included skills.
 
 ---
 
@@ -64,7 +67,7 @@ See [project-guide.md](project-guide.md) for full usage instructions.
 
 Each project maintains a `history/` folder with monthly log files (`history/YYYY-MM-monthname.md`). Claude appends an entry whenever a task or milestone is completed, capturing the date, type, description, and business value.
 
-**Recommendation:** Periodically remind Claude to record work history — especially at the end of a work session or when wrapping up a milestone. Also make sure Claude asks for (and records) **business value** when you create a new task or milestone. This history is the primary input for automated weekly status reports and productivity tracking.
+**Recommendation:** Periodically remind Claude to record work history — especially at the end of a work session or when wrapping up a milestone. Also make sure Claude asks for (and records) **business value** when you create a new task or milestone. This history is the primary input for the `/status-report` skill — see [skills-guide.md](skills-guide.md) for details.
 
 ---
 

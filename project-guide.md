@@ -104,7 +104,11 @@ When you instruct Claude to refer to a file inside the newly added folder, you c
 
 ### .claudeignore Tips
 
-- For this project structure, `README.md` and `*.code-workspace` are excluded from Claude context.
+- For this project structure, `*.code-workspace` is excluded from Claude context (along with common noise like build artifacts, binaries, and OS files).
 - Claude honors `.gitignore` by default, so:
   - Non-Claude files **in git** → put in `.claudeignore`
   - Non-Claude files **not in git** → put in `.gitignore`
+
+### Activity History and Status Reports
+
+Each project maintains a `history/` folder where Claude records completed tasks and milestones. This history powers the `/status-report` skill, which generates weekly or monthly reports from your project activity. See [skills-guide.md](skills-guide.md) for details.
