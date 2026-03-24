@@ -7,10 +7,10 @@
 - Always confirm before any commit, push, or branch operation.
 
 ## Me
+- Name: Joe Smith
 - Email: joe.smith@machinify.com
-
-## My Projects Folder
-C:/path/to/your/Tasks
+- Projects: C:/path/to/your/Tasks
+- Reports: C:/path/to/your/Reports
 
 ## Jira (Atlassian)
 - Jira account ID: `123456:00000000-1111-2222-3333-444444444444`

@@ -27,22 +27,26 @@ Generate a weekly or monthly status report from project history files.
 - Format as `Month YYYY` (e.g., `March 2026`) — this is `{{week_of}}`.
 - Output filename: `report-YYYY-MM.md`.
 
-### 2. Locate projects root
-- Read `~/.claude/CLAUDE.md` and look for a `## My Projects Folder` section. The path is on the line immediately following that heading.
-- If the section is not found, stop and tell the user:
-  > ❌ `My Projects Folder` is not configured. Add the following to your `~/.claude/CLAUDE.md`:
+### 2. Locate projects root and reports directory
+- Read `~/.claude/CLAUDE.md` and find the `## Me` section.
+  - Extract the `Projects:` value — this is the projects root.
+  - Extract the `Reports:` value — this is the reports directory (used in Steps 6 and 9).
+- If `Projects:` is not found, stop and tell the user:
+  > ❌ `Projects` path is not configured. Add the following under `## Me` in your `~/.claude/CLAUDE.md`:
   > ```
-  > ## My Projects Folder
-  > /path/to/your/Tasks
+  > - Projects: /path/to/your/Tasks
   > ```
   > This should be the folder that contains all your project subdirectories.
+- If `Reports:` is not found, the reports directory falls back to the working directory.
 
 ### 3. Locate history files across all projects
-- Scan all immediate subdirectories of the projects root. A subdirectory is a **project** if it contains a `history/` folder.
-- For each project:
-  - Derive the project name: read the project's `CLAUDE.md` and extract the value after `# Project:` on the first matching line. If not found, fall back to the folder name.
+- Scan all immediate subdirectories of the projects root.
+- A subdirectory is a **CPT project** if it contains a `CLAUDE.md` with a `# Project:` heading. Silently skip any directory that does not meet this criterion (e.g., output folders, templates, non-project directories).
+- For each CPT project:
+  - Derive the project name: extract the value after `# Project:` on the first matching line of its `CLAUDE.md`.
   - Identify the history file(s) covering the target period (`history/YYYY-MM-monthname.md`). The target period may span two months — read both files if needed.
-- If no projects with history folders are found at all, stop and tell the user what path was scanned and that no `history/` directories were found.
+- If no CPT projects are found at all, stop and tell the user what path was scanned and that no CPT project directories were found.
+- CPT projects that have no `history/` folder are noted for the Step 8 warning but do not cause an error.
 
 ### 4. Parse entries for the target period
 - For each project, filter entries whose `YYYY-MM-DD` date prefix falls within the period's start and end dates (inclusive).
@@ -54,10 +58,10 @@ Generate a weekly or monthly status report from project history files.
 - Track any completed entries where `Business Value` is absent or empty.
 
 ### 5. Resolve `{{prepared_by}}`
-- Use the current user's full name from their global Claude settings (`~/.claude/CLAUDE.md`).
+- Extract the `Name:` value from the `## Me` section of `~/.claude/CLAUDE.md`.
 
 ### 6. Load the template
-- If `report-template.md` exists in the working directory, use it as the report structure.
+- If `report-template.md` exists in the reports directory (from Step 2), use it as the report structure.
 - Otherwise, use the default template embedded at the bottom of this skill file.
 
 ### 7. Build report content
@@ -100,7 +104,7 @@ Generate a weekly or monthly status report from project history files.
 
 ### 9. Write the report file
 - Use the output filename determined in Step 1.
-- Write the file to the working directory.
+- Write the file to the reports directory (from Step 2), falling back to the working directory if not configured.
 - Render the report in the chat for review.
 - Ask the user: "Does this look right? Let me know if you'd like any changes."
 
@@ -108,7 +112,7 @@ Generate a weekly or monthly status report from project history files.
 
 ## Default Template
 
-Use this structure when no `report-template.md` is found in the working directory:
+Use this structure when no `report-template.md` is found in the reports directory:
 
 ```markdown
 # Status Report
