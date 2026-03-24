@@ -46,7 +46,10 @@ Generate a weekly or monthly status report from project history files.
   - Derive the project name: extract the value after `# Project:` on the first matching line of its `CLAUDE.md`.
   - Identify the history file(s) covering the target period (`history/YYYY-MM-monthname.md`). The target period may span two months — read both files if needed.
 - If no CPT projects are found at all, stop and tell the user what path was scanned and that no CPT project directories were found.
-- CPT projects that have no `history/` folder are noted for the Step 8 warning but do not cause an error.
+- Track each CPT project in one of three states for Step 8:
+  - **No history folder:** `history/` directory does not exist.
+  - **No entries for period:** `history/` exists (even if only a placeholder like `.gitkeep`) but no entries fall within the target date range.
+  - **Has entries:** one or more entries matched — included in the report.
 
 ### 4. Parse entries for the target period
 - For each project, filter entries whose `YYYY-MM-DD` date prefix falls within the period's start and end dates (inclusive).
@@ -95,12 +98,14 @@ Generate a weekly or monthly status report from project history files.
   > ⚠️ Business value was missing for one or more history entries. For best results, add `Business Value:` to those entries and regenerate the report.
 - If no in-progress entries were found:
   > ⚠️ No in-progress entries found — the "Coming Up" section was not included in the report.
-- If any project subdirectories were skipped because they had no `history/` folder, list each one by name:
-  > ⚠️ The following projects were skipped because they have no `history/` folder and could not contribute to this report:
+- If any CPT projects had no `history/` folder:
+  > ⚠️ The following projects were skipped — no `history/` folder found:
   > - `<project name>`
-  > - ...
   >
-  > To include these projects in future reports, add a `history/` folder to each one and log activity using the entry format described in the `## Data Sources` section of your project's `CLAUDE.md`. The global `~/.claude/CLAUDE.md` file defines the expected format and conventions.
+  > To include these projects in future reports, add a `history/` folder and log activity using the entry format in your project's `CLAUDE.md`.
+- If any CPT projects had a `history/` folder but no entries for the report period:
+  > ⚠️ The following projects had no history entries for this period:
+  > - `<project name>`
 
 ### 9. Write the report file
 - Use the output filename determined in Step 1.
