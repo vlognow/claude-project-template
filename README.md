@@ -39,11 +39,13 @@ It has three specific fields that need your attention:
 
 1. Set your email on the Email: line
 2. Set your Projects Folder path under **My Projects Folder**
-3. Set your Jira account ID (if you are using the Atlassian MCP server with **CC**).
->To find your Jira account ID, open a browser where you're logged into Jira and navigate to
-  https://machinify.atlassian.net/rest/api/3/myself — your accountId is in the JSON response.
->
-> To install the Atlassian MCP Server, see this [Notion article](https://www.notion.so/machinify/Install-Claude-Code-Enterprise-30d5356b39718056be01e5eb7ce42d15#30d5356b3971804e871cf0018e771ad2)
+3. Fill in your Jira credentials under the `## Jira` section:
+   - **Machinify Jira** (`mcp__atlassian__` tools): Set your account ID. To find it, open a browser logged into Jira and navigate to `https://machinify.atlassian.net/rest/api/latest/myself` — your `accountId` is in the JSON response.
+   - **Performant Jira** (`mcp__jira-dc__` tools): Set your user key (typically your login username, e.g. `jsmith`).
+   - If you only use one system, leave the other placeholder in place or delete that subsection.
+   > To install the Machinify Jira MCP server, see this [Notion article](https://www.notion.so/machinify/Install-Claude-Code-Enterprise-30d5356b39718056be01e5eb7ce42d15#30d5356b3971804e871cf0018e771ad2)
+   >
+   > To install the Performant Jira MCP server, see this [Notion article](https://www.notion.so/machinify/Connect-Claude-Code-to-Performant-Jira-Confluence-Data-Center-3115356b397181a1bcbbd09aed0ca8d1)
 
 ## Get Started
 
