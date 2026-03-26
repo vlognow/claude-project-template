@@ -38,6 +38,9 @@
 - At the start of each new project, proactively create a MEMORY.md in the auto memory directory with key paths, decisions, and milestone status.
 - Keep MEMORY.md current as work progresses — update milestone status, add decisions made, and resolve open questions as they are answered.
 
+## Tasks
+- Open tasks are tracked in milestone `.md` files. When asked about pending or open tasks, check those files rather than the conversation task list.
+
 ## Workspace Paths
 - To locate repos referenced in a project, read `project.code-workspace` in the working directory.
 - Resolve any relative paths against the workspace file's location, then convert to Unix-style for shell use (e.g., `C:\Users\foo\bar` → `/c/Users/foo/bar`).
