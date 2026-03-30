@@ -19,10 +19,9 @@ jobs:
           VERSION=${GITHUB_REF_NAME}
           zip -r "CPT-${VERSION}.zip" . --exclude ".git/*"
 
-      - name: Upload asset and add release notes
+      - name: Create release with asset and notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION=${GITHUB_REF_NAME}
-          gh release upload "${VERSION}" "CPT-${VERSION}.zip"
-          gh release edit "${VERSION}" --generate-notes
+          gh release create "${VERSION}" "CPT-${VERSION}.zip" --generate-notes --title "${VERSION}"
