@@ -24,4 +24,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION=${GITHUB_REF_NAME}
-          gh release create "${VERSION}" "CPT-${VERSION}.zip" --generate-notes --title "${VERSION}"
+          PREV_TAG=$(git describe --tags --abbrev=0 "${VERSION}^" 2>/dev/null || echo "")
+          if [ -n "${PREV_TAG}" ]; then
+            NOTES=$(git log "${PREV_TAG}..${VERSION}" --pretty=format:"- %s" --no-merges)
+          else
+            NOTES=$(git log "${VERSION}" --pretty=format:"- %s" --no-merges)
+          fi
+          gh release create "${VERSION}" "CPT-${VERSION}.zip" --notes "${NOTES}" --title "${VERSION}"
