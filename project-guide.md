@@ -4,7 +4,11 @@ This project template is designed to give you a quick way to start a new project
 
 ## Create your new project
 
-1. **Copy:** Start by copying the _Template folder to wherever you keep your work projects *(we will refer to this folder as your **Work** folder)* - rename the copied folder to a short, project name *(we will refer to this copied folder as the **Project** folder)*.
+1. **Copy:** Start by copying the _Template folder to wherever you keep your work projects *(we will refer to this folder as your **Work** folder)* - rename the copied folder to a short, identifiable project name *(**Important:** this name will be used as your Claude window title and session name. We will refer to this copied folder as the **Project** folder)*.
+
+> :rocket: **Want Claude to do the setup for you?** Open the workspace (double-click `project.code-workspace`), wait for Claude to start, then say: *"Read quick-start.md and follow it"* — Claude will ask you a few questions and configure everything automatically. See [quick-start.md](_Template/quick-start.md) for details.
+
+**Or set up manually (steps 2–3 below):**
 
 ### Edit `CLAUDE.md` in the Project folder:
 2. **Set attributes**
@@ -110,6 +114,18 @@ When you instruct Claude to refer to a file inside the newly added folder, you c
 - Claude honors `.gitignore` by default, so:
   - Non-Claude files **in git** → put in `.claudeignore`
   - Non-Claude files **not in git** → put in `.gitignore`
+
+### Keeping your template up to date
+
+When a new version of the Claude Project Template is released, run the upgrade workflow to apply changes to your global files and all existing projects:
+
+1. Pull the latest repo (`git pull` in your `claude-project-template` folder)
+2. Launch Claude from any directory
+3. Say: *"Read `/path/to/claude-project-template/update-projects.md` and follow it"*
+
+The workflow is idempotent — safe to re-run at any time. See [update-projects.md](update-projects.md) for details on what each upgrade checks and updates.
+
+---
 
 ### Activity History and Status Reports
 

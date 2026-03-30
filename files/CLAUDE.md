@@ -25,6 +25,7 @@
 ### General
 - Use whichever Jira MCP server tools are available in the current project context. If both are available, use the **Default Jira System** field in the project's CLAUDE.md to determine which instance to use.
 - Never hard-code sprint IDs — look up the active sprint dynamically via `list_sprints_for_board`
+- for the Performant Jira, use `jira_add_worklog` to log time; it will appear in Tempo automatically (Always confirm issue key, time, date, and a brief comment before submitting)
 
 ## MCP Tools
 

@@ -1,21 +1,23 @@
-# Milestone 1: xxx
+# Milestone 1: [ms-name-xxx]
 
 ## Goal
-Do xxx.
+[Short description of milestone goal]
 
 ## Business Value
 [Describe the concrete value this milestone delivers — e.g., saves N hours/week, unblocks team Y, reduces error rate by Z%]
 
+## Jira Story
+[Optional Jira story id - e.g., IDS-12345]
+
 ## Key Decisions
-- xxx must be built in Rust
+- [Optional list decisions that are finalized - e.g., xxx must be built in Rust]
 
 ## Open Questions
-- Is aspect yyy really needed for xxx?
+- [Optional list open questions - e.g., Is aspect yyy really needed for xxx?]
 
 ## Background
-- `src/xxx.go` — contains code related to xxx.
-- [Project xxx](https://www.notion.so/your-workspace/Page-xxx) contains helpful documentation
+[Optional]
+- [Project xxx](https://www.notion.so/your-workspace/Page-xxx) contains helpful documentation for xxx
 
 ## Tasks
-- [ ] **Understand xxx requirements** — confirm what is needed for xxx | *Business Value: enables scoping of xxx*
 - [ ] **Build xxx** — implement phase 1 functionality | *Business Value: [describe]*

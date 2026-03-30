@@ -39,4 +39,6 @@ The report is written to your project root and rendered in chat for review:
 
 ### Customizing the report structure
 
-Place a `report-template.md` file in your project root to override the default report layout. The `_Template` folder includes a default `report-template.md` you can customize.
+The skill looks for `report-template.md` in your `Reports` folder (the path set under `## Me` in `~/.claude/CLAUDE.md`). If found, it uses that as the report layout; otherwise it falls back to a built-in default.
+
+A starter [report-template.md](report-template.md) is included at the repo root. Once your `Reports:` path is configured, copy it there and customize as needed.

@@ -21,7 +21,9 @@
                     "-ExecutionPolicy",
                     "Bypass",
                     "-File",
-                    "${env:USERPROFILE}/.claude/start-claude.ps1"
+                    "${env:USERPROFILE}/.claude/start-claude.ps1",
+                    "-name",
+                    "${workspaceFolderBasename}"
                 ]
             },
             "osx": {

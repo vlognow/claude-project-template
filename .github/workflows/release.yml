@@ -1,0 +1,28 @@
+name: Attach Release Asset
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  attach-asset:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build zip
+        run: |
+          VERSION=${GITHUB_REF_NAME}
+          zip -r "CPT-${VERSION}.zip" . --exclude ".git/*"
+
+      - name: Upload asset and add release notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${GITHUB_REF_NAME}
+          gh release upload "${VERSION}" "CPT-${VERSION}.zip"
+          gh release edit "${VERSION}" --generate-notes

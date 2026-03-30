@@ -1,7 +1,21 @@
-﻿# We want to start claude independent of any other program to avoid spawning
-# multiple VSCode windows on startup - So remove these possibly-inherited env vars
-'VSCODE_PID', 'VSCODE_CWD', 'TERM_PROGRAM' | ForEach-Object { if (Test-Path "Env:$_") { Remove-Item "Env:$_" } }
+﻿param (
+    [string]$name
+)
 
 # Ensure $args[0] is set to something
 if ($args[0]) { Set-Location $args[0] }
-claude
+
+$cwd = (Get-Location).Path
+$projectDirName = $cwd -replace '[:\\ _]', '-'
+$projectDir = "$env:USERPROFILE\.claude\projects\$projectDirName"
+
+# Locate a prior session for this project directory
+$hasPrior = (Get-ChildItem -Path $projectDir -Filter "*.jsonl" -ErrorAction SilentlyContinue | Measure-Object).Count -gt 0
+
+if ($hasPrior) {
+  Write-Host "Continuing prior session $name..."
+  claude --ide --continue -n $name
+} else {
+  Write-Host "Starting new session $name..."
+  claude --ide -n $name
+}
