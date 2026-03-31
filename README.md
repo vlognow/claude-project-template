@@ -16,36 +16,28 @@ The idea of this project template is to get you using [Claude Code](https://clau
 
 ## Installation
 
-### Step 1 — Install global files
+Installation is handled by `setup.md` — a guided workflow that Claude executes for you.
 
-Double-click the installer for your platform. It copies everything in `files/` into `~/.claude/`, skipping any files that already exist.
+### Step 1 — Download the latest release
 
-**Windows:** Double-click `install_win.bat` in Explorer.
+Go to the [Releases page](https://github.com/vlognow/claude-project-template/releases), download the latest `CPT-vX.X.X.zip` asset, and unzip it to a convenient location on your computer.
 
-**Mac:** Double-click `install_mac.command` in Finder.
-> First time only: macOS may block it. If so, right-click → Open, then click Open in the dialog. You may also need to run `chmod +x install_mac.command` once in Terminal if it doesn't open.
+### Step 2 — Run the setup workflow
 
-After running, edit `~/.claude/CLAUDE.md` to fill in your personal details (email, Jira account ID, etc.).
+Launch Claude from any directory and say:
 
-> **Manual install:** If you prefer not to use the installer, copy each file in `files/` to `~/.claude/`, and copy `files/skills/status-report/SKILL.md` to `~/.claude/skills/status-report/SKILL.md`. Skip any files that already exist at the destination. **Mac users:** skip `start-claude.ps1` — it's Windows-only.
+> *"Read /path/to/claude-project-template/setup.md and follow it"*
 
-> **Existing files are skipped.** If you already have a `~/.claude/CLAUDE.md`, the installers will not overwrite it. Manually merge any sections from `files/CLAUDE.md` into your existing file.
+Claude will detect that this is a fresh install, ask for your name, email, Projects folder path, and Reports folder path, then set everything up automatically — including copying `~/.claude/CLAUDE.md`, installing the status-report skill, and copying `_Template/` to your Projects folder.
 
-> :sunglasses: To keep tab titles after sleep/wake on Windows, ask Claude: "Add suppressApplicationTitle to my Windows PowerShell profile in Windows Terminal settings.json"
-
-### Step 2 — Edit the global `~/.claude/CLAUDE.md` file
-
-It has three specific fields that need your attention:
-
-1. Set your email on the Email: line
-2. Set your Projects Folder path under **My Projects Folder**
-3. Fill in your Jira credentials under the `## Jira` section:
-   - **Machinify Jira** (`mcp__atlassian__` tools): Set your account ID. To find it, open a browser logged into Jira and navigate to `https://machinify.atlassian.net/rest/api/latest/myself` — your `accountId` is in the JSON response.
-   - **Performant Jira** (`mcp__jira-dc__` tools): Set your user key (typically your login username, e.g. `jsmith`).
-   - If you only use one system, leave the other placeholder in place or delete that subsection.
-   > To install the Machinify Jira MCP server, see this [Notion article](https://www.notion.so/machinify/Install-Claude-Code-Enterprise-30d5356b39718056be01e5eb7ce42d15#30d5356b3971804e871cf0018e771ad2)
-   >
-   > To install the Performant Jira MCP server, see this [Notion article](https://www.notion.so/machinify/Connect-Claude-Code-to-Performant-Jira-Confluence-Data-Center-3115356b397181a1bcbbd09aed0ca8d1)
+> After setup, fill in your Jira credentials in `~/.claude/CLAUDE.md` under the `## Jira` section:
+> - **Machinify Jira** (`mcp__atlassian__` tools): Set your account ID. To find it, navigate to `https://machinify.atlassian.net/rest/api/latest/myself` — your `accountId` is in the JSON response.
+> - **Performant Jira** (`mcp__jira-dc__` tools): Set your user key (typically your login username, e.g. `jsmith`).
+> - If you only use one system, leave the other placeholder in place or delete that subsection.
+>
+> To install the Machinify Jira MCP server, see this [Notion article](https://www.notion.so/machinify/Install-Claude-Code-Enterprise-30d5356b39718056be01e5eb7ce42d15#30d5356b3971804e871cf0018e771ad2)
+>
+> To install the Performant Jira MCP server, see this [Notion article](https://www.notion.so/machinify/Connect-Claude-Code-to-Performant-Jira-Confluence-Data-Center-3115356b397181a1bcbbd09aed0ca8d1)
 
 ## Get Started
 

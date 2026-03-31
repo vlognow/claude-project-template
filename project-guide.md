@@ -6,38 +6,17 @@ This project template is designed to give you a quick way to start a new project
 
 1. **Copy:** Start by copying the _Template folder to wherever you keep your work projects *(we will refer to this folder as your **Work** folder)* - rename the copied folder to a short, identifiable project name *(**Important:** this name will be used as your Claude window title and session name. We will refer to this copied folder as the **Project** folder)*.
 
-> :rocket: **Want Claude to do the setup for you?** Open the workspace (double-click `project.code-workspace`), wait for Claude to start, then say: *"Read quick-start.md and follow it"* — Claude will ask you a few questions and configure everything automatically. See [quick-start.md](_Template/quick-start.md) for details.
+2. **Open the workspace** — double-click `project.code-workspace`. Claude Code will launch automatically.
 
-**Or set up manually (steps 2–3 below):**
+3. **Run the quick-start workflow** — once Claude is running, say:
 
-### Edit `CLAUDE.md` in the Project folder:
-2. **Set attributes**
-   - **Project** - Set the project name at the top.
-   - **Default Jira Project** - If you intend to have Claude interact with Jira, set the Jira project to use.
-   - **Scope** - If there are specific topics that you want to ensure they are either **in** scope or **out of** scope, add them to the appropriate sub-section. Otherwise, clear these items.
-3. **Define Milestones and Tasks**
-This template allows for multiple phases or milestones to your project. Each milestone has its own list of tasks. The idea is that you work on one milestone at a time - this keeps all the information/tasks for the other milestones **out of context** until they are needed. Within `CLAUDE.md`, there is a simple table showing all the milestone names, short status and a link to the separate milestone file.
+   > *"Read quick-start.md and follow it"*
 
-> :sunglasses: Just define enough to get started (at least 1 milestone) - Claude can do a great job of adding milestones and tasks, adjusting goals, adding questions and decisions, etc. - Just ask!
+   Claude will ask you a few questions and configure `CLAUDE.md` and your first milestone file automatically.
 
-**Update the milestone table - For each milestone:**
-  - Set the milestone name
-  - Set the milestone status: no fixed rules here, but typically (`Not Started` → `Planning`→ `In Progress` → `Complete`)
-  - Set the Markdown URL to point to the milestone filename using a short abbreviation (xxx) in the form `[milestone-xxx](milestone1-xxx.md)`
+> :sunglasses: Prefer to set things up yourself? See [Manual Project Setup](#manual-project-setup) at the bottom of this guide.
 
-### Edit the `milestoneN-xxx.md` files
-
-For each milestone:
-
-1. **Rename the file `milestoneN-xxx.md`** to match your milestone's filename (as defined above)
-2. **Edit the milestone file**
-  - Set the milestone name (at the top) to match the name column specified in the `CLAUDE.md` file's milestone table.
-  - Specify the milestone goal
-  - *(optional)* List any **Key Decisions** that have been made as part of this milestone's work (These help prevent Claude from *re-analyzing* decisions that have already been made)
-  - *(optional)* List any **Open Questions** that have not yet been answered (These help Claude suggest next steps and/or areas to research)
-  - *(optional)* Provide links to related background information
-  - Include a list of tasks to be completed to achieve your milestone/goal. Keep the `- [ ] **Name** — description` format for each task
-
+4. **Close** — close Claude and all VSCode windows so the next open picks up the updated `CLAUDE.md`.
 
 ##### ...Project setup complete
 
@@ -53,7 +32,7 @@ Open the project by double-clicking `project.code-workspace` (or `File > Open Wo
 
 #### Auto-launching Claude Code
 
-When the workspace opens, VSCode automatically runs the **Start Claude** task (defined in `.vscode/tasks.json`). This opens a new terminal running `claude`, using `~/.claude/start-claude.ps1` to ensure a clean environment (Windows) or via AppleScript (Macintosh). The workspace also sets the Claude window's working directory to the project root and sets its window title to the folder name (this way having multiple projects open at once won't be confusing - there won't be 4 'Claude Code' terminal windows).
+When the workspace opens, VSCode automatically runs the **Start Claude** task (defined in `.vscode/tasks.json`). This opens a new terminal running `claude --continue`, using `~/.claude/start-claude.ps1` to restore your prior session. The workspace also sets the Claude window's working directory to the project root and sets its window title to the folder name (this way having multiple projects open at once won't be confusing - there won't be 4 'Claude Code' terminal windows).
 
 > :round_pushpin: On first open, VSCode may prompt you to allow automatic task execution. Click **Allow** (or set `task.allowAutomaticTasks` to `on` in your VSCode user settings).
 
@@ -66,7 +45,7 @@ When the workspace opens, VSCode automatically runs the **Start Claude** task (d
 
 The global `~/.claude/CLAUDE.md` installed by this template enables **auto memory** — Claude will automatically save notes (build commands, debugging insights, discovered preferences) to `~/.claude/projects/<project>/memory/MEMORY.md` and persist them across sessions. You can view, edit, or clear these notes at any time by running `/memory` inside a Claude session. See [Auto memory](https://code.claude.com/docs/en/memory#auto-memory) for full details on how it works and how to disable it if needed.
 
-> :wine_glass: Between the project CLAUDE.md and auto memory, **CC** becomes very good at resuming work after you've closed your project and restart at a later time.
+> :wine_glass: Between the project CLAUDE.md, auto memory, and starting with --continue, **CC** becomes very good at resuming work after you've closed your project and restart at a later time.
 
 #### Adding related folders
 
@@ -100,8 +79,6 @@ When you instruct Claude to refer to a file inside the newly added folder, you c
 - Global MCP servers are defined in `~/.claude.json` (near the bottom).
 > :radioactive: But be careful, within the `.claude.json` file are **multiple** `mcpServers` sections - All but 1 are within a section starting with the full path to a project - **normally, you don't want those** - you'll add your MCP servers at the User level (the one mcpServers section **not** inside a project section)
 
-> :sunglasses: To keep tab titles after sleep/wake on Windows, ask Claude: "Add suppressApplicationTitle to my Windows PowerShell profile in Windows Terminal settings.json"
-
 ### Atlassian MCP Tips
 
 - When creating Jira stories via Claude, you can set: Summary, Description, Assignee, Priority, Labels, Components, Issue Type.
@@ -121,12 +98,49 @@ When a new version of the Claude Project Template is released, run the upgrade w
 
 1. Pull the latest repo (`git pull` in your `claude-project-template` folder)
 2. Launch Claude from any directory
-3. Say: *"Read `/path/to/claude-project-template/update-projects.md` and follow it"*
+3. Say: *"Read `/path/to/claude-project-template/setup.md` and follow it"*
 
-The workflow is idempotent — safe to re-run at any time. See [update-projects.md](update-projects.md) for details on what each upgrade checks and updates.
+The workflow is idempotent — safe to re-run at any time. See [setup.md](setup.md) for details on what each upgrade checks and updates.
 
 ---
 
 ### Activity History and Status Reports
 
 Each project maintains a `history/` folder where Claude records completed tasks and milestones. This history powers the `/status-report` skill, which generates weekly or monthly reports from your project activity. See [skills-guide.md](skills-guide.md) for details.
+
+---
+
+## Manual Project Setup
+
+If you prefer to configure your project files by hand instead of using `quick-start.md`, follow these steps.
+
+### Edit `CLAUDE.md` in the Project folder
+
+1. **Set attributes**
+   - **Project** — set the project name at the top.
+   - **Default Jira Project** — if you intend to have Claude interact with Jira, set the Jira project to use.
+   - **Scope** — if there are specific topics to include or exclude from Claude's context, add them to the appropriate sub-section. Otherwise, clear these items.
+
+2. **Define Milestones and Tasks**
+
+   This template allows for multiple phases or milestones. Each milestone has its own list of tasks. The idea is that you work on one milestone at a time — this keeps information for other milestones out of context until needed.
+
+   > :sunglasses: Just define enough to get started (at least 1 milestone) — Claude can add milestones and tasks, adjust goals, add questions and decisions, etc. Just ask!
+
+   **Update the milestone table — for each milestone:**
+   - Set the milestone name
+   - Set the milestone status: no fixed rules, but typically (`Not Started` → `Planning` → `In Progress` → `Complete`)
+   - Set the Markdown URL using a short abbreviation in the form `[milestone1-xxx](milestone1-xxx.md)`
+
+### Edit the `milestoneN-xxx.md` files
+
+For each milestone:
+
+1. **Rename** `milestoneN-xxx.md` to match your milestone's filename (as defined above)
+2. **Edit the milestone file**
+   - Set the milestone name at the top to match the `CLAUDE.md` milestone table
+   - Specify the milestone goal and business value
+   - *(optional)* List any **Key Decisions** that are finalized — helps prevent Claude from re-analyzing settled questions
+   - *(optional)* List any **Open Questions** — helps Claude suggest next steps and areas to research
+   - *(optional)* Provide links to related background information
+   - Include a list of tasks: use the `- [ ] **Name** — description` format for each. To associate a task with its own Jira story, append `| Jira: IDS-12345` to the task line.

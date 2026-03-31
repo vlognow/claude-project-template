@@ -6,8 +6,9 @@
 ## Business Value
 [Describe the concrete value this milestone delivers — e.g., saves N hours/week, unblocks team Y, reduces error rate by Z%]
 
-## Jira Story
-[Optional Jira story id - e.g., IDS-12345]
+## Jira
+- Epic:
+- Story:
 
 ## Key Decisions
 - [Optional list decisions that are finalized - e.g., xxx must be built in Rust]

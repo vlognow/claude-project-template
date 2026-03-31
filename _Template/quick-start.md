@@ -41,8 +41,11 @@ Ask each question individually and wait for the user's answer before asking the 
 After receiving the first task, tell the user:
 > "Just one task is enough to get started — you can ask me to add more milestones and tasks at any time after setup is complete."
 
-5. If Jira is enabled: "Do you have a Jira story ID for this milestone? (yes/no)"
-6. If yes: "What is the Jira story ID? (e.g. `IDS-12345`)"
+5. If Jira is enabled: "Do you have a Jira Epic or Story ID for this milestone? (yes/no)"
+6. If yes: "Enter Epic ID if applicable (or `n` to skip):"
+7. If yes: "Enter Story ID if applicable (or `n` to skip):"
+8. If Jira is enabled, tell the user: 
+> "You can also ask me to add a Jira Story ID to *individual* tasks at any time after setup is complete."
 
 ### Step 4 — Update CLAUDE.md
 
@@ -67,7 +70,7 @@ Edit `CLAUDE.md` in the project root:
   - Set the `## Goal` section to the goal provided
   - Set the `## Business Value` section to the business value provided
   - Replace the placeholder task with: `- [ ] **<task name>** — <task description>`
-  - If a Jira story ID was provided, set the `## Jira Story` section to that value; otherwise leave it blank
+  - Under `## Jira`, set `- Epic:` and `- Story:` to the values provided (leave blank if not provided)
   - Leave all other optional sections (Key Decisions, Open Questions, Background) in place with their placeholder text cleared but headings intact
 
 ### Step 6 — Write history
