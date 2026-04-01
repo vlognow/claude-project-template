@@ -148,7 +148,7 @@ For each `milestoneN-*.md` file in the project root:
 - If `## Jira` already exists with `Epic:` and `Story:` sub-fields, skip silently.
 
 #### 7e. Update .vscode/tasks.json — Start Claude task
-Replace the existing `Start Claude` task in the project's `.vscode/tasks.json` with the current version from `_Template/.vscode/tasks.json`. Preserve any other tasks already present in the file.
+Replace the existing `Start Claude` task in the project's `.vscode/tasks.json` with the current version from the repo's `_Template/.vscode/tasks.json`. Preserve any other tasks already present in the file.
 
 ### Step 8 — Update _Template/ folder
 
