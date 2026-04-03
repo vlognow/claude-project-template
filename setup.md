@@ -21,6 +21,18 @@ Ask: "Are all other VSCode and Claude sessions closed? (yes to continue)"
 
 If the user says no or asks why, explain and wait. Do not proceed until confirmed.
 
+**Ask Claude Mode upfront:**
+
+Ask:
+> "How would you like Claude to launch when you open a project?
+> - **terminal** *(default — type `y` to accept)* — opens Claude in the VSCode integrated terminal
+> - **external** — opens Claude in a separate Windows Terminal window (uses start-claude.ps1)"
+
+If the user types `y` or `terminal`, set `CLAUDE_MODE=terminal`. If the user types `external`, set `CLAUDE_MODE=external`.
+
+If the user chooses `terminal`, print:
+> "💡 Tip: To hide the running task indicator that appears in VSCode, add `\"task.showRunningTask\": false` to your VSCode user settings. To do this: press `Ctrl+Shift+P`, choose **Preferences: Open User Settings (JSON)**, and add the setting."
+
 **First, detect the mode:**
 - If `~/.claude/CLAUDE.md` does **not** exist → **Install mode** (Steps 1–3b, then continue to Common)
 - If `~/.claude/CLAUDE.md` **exists** → **Upgrade mode** (Steps 4–6, then continue to Common)
@@ -63,18 +75,6 @@ Copy `files/CLAUDE.md` from the repo to `~/.claude/CLAUDE.md`, then fill in the 
 ### Step 3a — Copy report-template.md to Reports folder
 
 Copy `report-template.md` from the repo to the user's Reports folder. If the file already exists there, skip silently.
-
-### Step 3b — Ask Claude Mode
-
-Ask:
-> "How would you like Claude to launch when you open a project?
-> - **terminal** *(default — type `y` to accept)* — opens Claude in the VSCode integrated terminal
-> - **external** — opens Claude in a separate Windows Terminal window"
-
-Store the answer as `CLAUDE_MODE` for use in Step 7e. If the user types `y` or `terminal`, use `terminal`. If the user types `external`, use `external`.
-
-If the user chooses `terminal`, print:
-> "💡 Tip: To hide the running task indicator that appears in VSCode, add `\"task.showRunningTask\": false` to your VSCode user settings. To do this: press `Ctrl+Shift+P`, choose **Preferences: Open User Settings (JSON)**, and add the setting."
 
 *Continue to Common section.*
 
@@ -131,18 +131,6 @@ If absent, add the `## Workspace Paths` section from `files/CLAUDE.md`.
 If absent, copy the full `## Activity History` section (including `### Highlights` and `### Reference Links` subsections) from `files/CLAUDE.md`.
 
 If the section exists but is missing the `### Highlights` or `### Reference Links` subsections, add the missing ones from `files/CLAUDE.md`.
-
-#### 6f. Ask Claude Mode
-
-Ask:
-> "How would you like Claude to launch when you open a project?
-> - **terminal** *(default — type `y` to accept)* — opens Claude in the VSCode integrated terminal
-> - **external** — opens Claude in a separate Windows Terminal window"
-
-Store the answer as `CLAUDE_MODE` for use in Step 7e. If the user types `y` or `terminal`, use `terminal`. If the user types `external`, use `external`.
-
-If the user chooses `terminal`, print:
-> "💡 Tip: To hide the running task indicator that appears in VSCode, add `\"task.showRunningTask\": false` to your VSCode user settings. To do this: press `Ctrl+Shift+P`, choose **Preferences: Open User Settings (JSON)**, and add the setting."
 
 *Continue to Common section.*
 
