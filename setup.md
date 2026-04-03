@@ -254,10 +254,16 @@ If any CPT project folder contains a `report-template.md` file, tell the user:
 
 ### Step 10 — Summary
 
-Print a consolidated summary:
-- Mode detected: Install or Upgrade
-- Global files created/overwritten (Steps 2 or 5)
-- `~/.claude/CLAUDE.md`: created (Install) or sections added/updated (Upgrade), or "already up to date"
-- `_Template/` folder: copied, updated, or `report-template.md` removed (Step 8)
-- For each project: list of changes applied, or "already up to date"
-- Any items flagged for manual follow-up (missing placeholders, misplaced files, etc.)
+Print a horizontal rule (`---`) to separate the summary from prior output, then print:
+
+- **Mode:** Install or Upgrade
+- **Claude Mode:** terminal or external
+- **Global files:** created or updated (or "already up to date")
+- **~/.claude/CLAUDE.md:** created (Install) or sections added/updated (Upgrade), or "already up to date"
+- **_Template/:** copied, updated, or already up to date
+- **Projects updated:** list project names on one line (or "none")
+- **Projects unchanged:** list project names on one line (or "none")
+- **⚠️ Action required:** list any items needing manual follow-up (missing placeholders, misplaced files, skipped projects, etc.) — omit this line if nothing to flag
+
+If `CLAUDE_MODE` is `terminal`, add:
+> "💡 To hide the VSCode running task indicator: press `Ctrl+Shift+P` → **Preferences: Open User Settings (JSON)** → add `\"task.showRunningTask\": false`"
