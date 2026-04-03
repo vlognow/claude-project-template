@@ -14,6 +14,13 @@ Claude will detect whether this is a new installation or an upgrade and proceed 
 
 You are running the setup workflow for the Claude Project Template. Derive the repo root from the path of this file.
 
+**Before proceeding, warn the user:**
+> "⚠️ Please make sure all other VSCode windows and Claude sessions are closed before continuing. Setup will modify tasks.json files across your projects — open windows may reload stale versions or conflict with the changes."
+
+Ask: "Are all other VSCode and Claude sessions closed? (yes to continue)"
+
+If the user says no or asks why, explain and wait. Do not proceed until confirmed.
+
 **First, detect the mode:**
 - If `~/.claude/CLAUDE.md` does **not** exist → **Install mode** (Steps 1–3b, then continue to Common)
 - If `~/.claude/CLAUDE.md` **exists** → **Upgrade mode** (Steps 4–6, then continue to Common)
@@ -57,6 +64,18 @@ Copy `files/CLAUDE.md` from the repo to `~/.claude/CLAUDE.md`, then fill in the 
 
 Copy `report-template.md` from the repo to the user's Reports folder. If the file already exists there, skip silently.
 
+### Step 3b — Ask Claude Mode
+
+Ask:
+> "How would you like Claude to launch when you open a project?
+> - **terminal** *(default — type `y` to accept)* — opens Claude in the VSCode integrated terminal
+> - **external** — opens Claude in a separate Windows Terminal window"
+
+Store the answer as `CLAUDE_MODE` for use in Step 7e. If the user types `y` or `terminal`, use `terminal`. If the user types `external`, use `external`.
+
+If the user chooses `terminal`, print:
+> "💡 Tip: To hide the running task indicator that appears in VSCode, add `\"task.showRunningTask\": false` to your VSCode user settings. To do this: press `Ctrl+Shift+P`, choose **Preferences: Open User Settings (JSON)**, and add the setting."
+
 *Continue to Common section.*
 
 ---
@@ -69,8 +88,7 @@ Read `~/.claude/CLAUDE.md` and extract:
 - `Projects:` path from the `## Me` section
 - `Reports:` path from the `## Me` section (may be absent — that is okay)
 
-If `Projects:` is not found, stop and tell the user:
-> "I couldn't find a `Projects:` path in `~/.claude/CLAUDE.md`. Please add `- Projects: /path/to/your/Tasks` under `## Me` and re-run."
+If `Projects:` is not found, empty, or still contains a placeholder value (square brackets), do not stop — Step 6a will prompt for it interactively.
 
 ### Step 5 — Overwrite global files (safe)
 
@@ -83,11 +101,13 @@ Copy the following files from the repo to the user's Claude installation, overwr
 Read `~/.claude/CLAUDE.md` and apply each check below. Skip silently if already correct.
 
 #### 6a. ## Me section fields
-Ensure all four fields are present under `## Me`. Add any that are missing with a `[fill in]` placeholder and flag them for the user:
+For each of the four fields under `## Me`, treat it as missing if it is absent, empty, or still contains a placeholder value (e.g. `[fill in]`, `[your name]`, `[your email]`, or any value in square brackets). For each such field, ask the user for the value interactively — do not use a placeholder:
 - `Name:`
 - `Email:`
 - `Projects:`
 - `Reports:`
+
+If all four fields are present and filled in, skip silently.
 
 #### 6b. ## Jira section structure
 Ensure the `## Jira` section contains three subsections:
@@ -111,6 +131,18 @@ If absent, add the `## Workspace Paths` section from `files/CLAUDE.md`.
 If absent, copy the full `## Activity History` section (including `### Highlights` and `### Reference Links` subsections) from `files/CLAUDE.md`.
 
 If the section exists but is missing the `### Highlights` or `### Reference Links` subsections, add the missing ones from `files/CLAUDE.md`.
+
+#### 6f. Ask Claude Mode
+
+Ask:
+> "How would you like Claude to launch when you open a project?
+> - **terminal** *(default — type `y` to accept)* — opens Claude in the VSCode integrated terminal
+> - **external** — opens Claude in a separate Windows Terminal window"
+
+Store the answer as `CLAUDE_MODE` for use in Step 7e. If the user types `y` or `terminal`, use `terminal`. If the user types `external`, use `external`.
+
+If the user chooses `terminal`, print:
+> "💡 Tip: To hide the running task indicator that appears in VSCode, add `\"task.showRunningTask\": false` to your VSCode user settings. To do this: press `Ctrl+Shift+P`, choose **Preferences: Open User Settings (JSON)**, and add the setting."
 
 *Continue to Common section.*
 
@@ -148,7 +180,74 @@ For each `milestoneN-*.md` file in the project root:
 - If `## Jira` already exists with `Epic:` and `Story:` sub-fields, skip silently.
 
 #### 7e. Update .vscode/tasks.json — Start Claude task
-Replace the existing `Start Claude` task in the project's `.vscode/tasks.json` with the current version from the repo's `_Template/.vscode/tasks.json`. Preserve any other tasks already present in the file.
+
+If the project's `.vscode/tasks.json` does **not** contain a task with label `Start Claude`, skip this step silently — the user has customized their task and opted out of management.
+
+If `Start Claude` exists, replace it with the appropriate version based on `CLAUDE_MODE`:
+
+- **`terminal`** — use the task from the repo's `_Template/.vscode/tasks.json`:
+  ```json
+  {
+      "label": "Start Claude",
+      "type": "shell",
+      "command": "claude --continue",
+      "presentation": {
+          "reveal": "always",
+          "panel": "new"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "runOptions": {
+          "runOn": "folderOpen"
+      }
+  }
+  ```
+
+- **`external`** — use this template (Windows Terminal + start-claude.ps1):
+  ```json
+  {
+      "label": "Start Claude",
+      "type": "process",
+      "command": "wt",
+      "args": [],
+      "windows": {
+          "command": "wt",
+          "args": [
+              "new-tab",
+              "--title",
+              "${workspaceFolderBasename}",
+              "--startingDirectory",
+              "${workspaceFolder}",
+              "--suppressApplicationTitle",
+              "--",
+              "powershell",
+              "-NoExit",
+              "-ExecutionPolicy",
+              "Bypass",
+              "-File",
+              "${env:USERPROFILE}/.claude/start-claude.ps1",
+              "-name",
+              "${workspaceFolderBasename}"
+          ]
+      },
+      "osx": {
+          "command": "osascript",
+          "args": [
+              "-e",
+              "tell application \"Terminal\" to do script \"cd '${workspaceFolder}' && claude\""
+          ]
+      },
+      "presentation": {
+          "reveal": "silent"
+      },
+      "problemMatcher": [],
+      "runOptions": {
+          "runOn": "folderOpen"
+      }
+  }
+  ```
+
+Preserve any other tasks already present in the file.
 
 ### Step 8 — Update _Template/ folder
 

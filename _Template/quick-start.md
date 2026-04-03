@@ -36,15 +36,14 @@ Ask each question individually and wait for the user's answer before asking the 
 1. "What is the name of your first milestone?"
 2. "What is the goal — one sentence describing what completing this milestone achieves?"
 3. "What is the business value — what concrete benefit does this milestone deliver?"
-4. "Enter the first task as: `task name : brief description`"
+4. If Jira is enabled: "Do you have a Jira Epic for this milestone? (enter the Epic ID or `n` to skip)"
+5. If Jira is enabled: "Do you have a Jira Story for this milestone? (enter the Story ID or `n` to skip)"
+6. "Enter the first task as: `task name : brief description`"
 
 After receiving the first task, tell the user:
 > "Just one task is enough to get started — you can ask me to add more milestones and tasks at any time after setup is complete."
 
-5. If Jira is enabled: "Do you have a Jira Epic or Story ID for this milestone? (yes/no)"
-6. If yes: "Enter Epic ID if applicable (or `n` to skip):"
-7. If yes: "Enter Story ID if applicable (or `n` to skip):"
-8. If Jira is enabled, tell the user: 
+7. If Jira is enabled, tell the user:
 > "You can also ask me to add a Jira Story ID to *individual* tasks at any time after setup is complete."
 
 ### Step 4 — Update CLAUDE.md

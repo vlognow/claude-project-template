@@ -3,39 +3,14 @@
     "tasks": [
         {
             "label": "Start Claude",
-            "type": "process",
-            "command": "wt",
-            "args": [],
-            "windows": {
-                "command": "wt",
-                "args": [
-                    "new-tab",
-                    "--title",
-                    "${workspaceFolderBasename}",
-                    "--startingDirectory",
-                    "${workspaceFolder}",
-                    "--suppressApplicationTitle",
-                    "--",
-                    "powershell",
-                    "-NoExit",
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-File",
-                    "${env:USERPROFILE}/.claude/start-claude.ps1",
-                    "-name",
-                    "${workspaceFolderBasename}"
-                ]
-            },
-            "osx": {
-                "command": "osascript",
-                "args": [
-                    "-e",
-                    "tell application \"Terminal\" to do script \"cd '${workspaceFolder}' && claude\""
-                ]
-            },
+            "type": "shell",
+            "command": "claude --continue",
             "presentation": {
-                "reveal": "silent"
+                "reveal": "always",
+                "panel": "new"
             },
+            "isBackground": true,
+            "problemMatcher": [],
             "runOptions": {
                 "runOn": "folderOpen"
             }
