@@ -19,15 +19,19 @@ jobs:
           VERSION=${GITHUB_REF_NAME}
           zip -r "CPT-${VERSION}.zip" . --exclude ".git/*"
 
-      - name: Create release with asset and notes
+      - name: Attach asset to release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION=${GITHUB_REF_NAME}
-          PREV_TAG=$(git describe --tags --abbrev=0 "${VERSION}^" 2>/dev/null || echo "")
-          if [ -n "${PREV_TAG}" ]; then
-            NOTES=$(git log "${PREV_TAG}..${VERSION}" --pretty=format:"- %s" --no-merges)
+          if gh release view "${VERSION}" > /dev/null 2>&1; then
+            gh release upload "${VERSION}" "CPT-${VERSION}.zip" --clobber
           else
-            NOTES=$(git log "${VERSION}" --pretty=format:"- %s" --no-merges)
+            PREV_TAG=$(git describe --tags --abbrev=0 "${VERSION}^" 2>/dev/null || echo "")
+            if [ -n "${PREV_TAG}" ]; then
+              NOTES=$(git log "${PREV_TAG}..${VERSION}" --pretty=format:"- %s" --no-merges)
+            else
+              NOTES=$(git log "${VERSION}" --pretty=format:"- %s" --no-merges)
+            fi
+            gh release create "${VERSION}" "CPT-${VERSION}.zip" --notes "${NOTES}" --title "${VERSION}"
           fi
-          gh release create "${VERSION}" "CPT-${VERSION}.zip" --notes "${NOTES}" --title "${VERSION}"
