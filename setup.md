@@ -30,9 +30,6 @@ Ask:
 
 If the user types `y` or `terminal`, set `CLAUDE_MODE=terminal`. If the user types `external`, set `CLAUDE_MODE=external`.
 
-If the user chooses `terminal`, print:
-> "💡 Tip: To hide the running task indicator that appears in VSCode, add `\"task.showRunningTask\": false` to your VSCode user settings. To do this: press `Ctrl+Shift+P`, choose **Preferences: Open User Settings (JSON)**, and add the setting."
-
 **First, detect the mode:**
 - If `~/.claude/CLAUDE.md` does **not** exist → **Install mode** (Steps 1–3b, then continue to Common)
 - If `~/.claude/CLAUDE.md` **exists** → **Upgrade mode** (Steps 4–6, then continue to Common)
